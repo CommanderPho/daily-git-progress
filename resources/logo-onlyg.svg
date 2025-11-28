@@ -1,0 +1,26 @@
+<svg width="256" height="256" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+
+
+  <!-- 2. The Internal Components -->
+  <g transform="translate(-50, -60)"> <!-- Shifted slightly up to center the whole composition -->
+    
+  <!-- The "G" Path 
+         - M 122 85: Starts at the top right of the curve (higher and shorter than before).
+         - A 22 22 ...: Draws the circular arc around to the right side.
+         - L 100 95: Draws the horizontal line inwards (raised to y=95).
+    -->
+    <!-- The Line (Vertical line dropping down) -->
+    <line x1="100" y1="115" x2="100" y2="130" stroke="black" stroke-width="8" stroke-linecap="round" />
+    <path d="M 120 78 A 24 24 0 1 0 124 95 L 100 95" 
+          fill="none" 
+          stroke="black" 
+          stroke-width="10" 
+          stroke-linecap="round"
+          stroke-linejoin="round" />
+          
+
+    <!-- The Circle (The dot at the bottom) -->
+    <circle cx="100" cy="140" r="10" fill="none" stroke="black" stroke-width="8" />
+    
+  </g>
+</svg>

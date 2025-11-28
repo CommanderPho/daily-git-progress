@@ -1,0 +1,146 @@
+{
+  "name": "daily-git-progress",
+  "displayName": "Daily Git Progress",
+  "description": "View git commits by date with commit and file views",
+  "version": "0.1.12",
+  "publisher": "seanho",
+  "license": "MIT",
+  "icon": "resources/logo-colour.png",
+  "bugs": {
+    "url": "https://github.com/hozixuan/daily-git-progress/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hozixuan/daily-git-progress.git"
+  },
+  "homepage": "https://github.com/hozixuan/daily-git-progress",
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "git",
+    "commit",
+    "progress",
+    "daily",
+    "history",
+    "timeline"
+  ],
+  "main": "./dist/extension",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "dailyGitProgress",
+          "title": "Daily Git Progress",
+          "icon": "./resources/logo-onlyg.svg"
+        }
+      ]
+    },
+    "views": {
+      "dailyGitProgress": [
+        {
+          "id": "dailyGitCommits",
+          "name": "By Commit",
+          "when": "config.git.enabled && gitOpenRepositoryCount != 0"
+        },
+        {
+          "id": "dailyGitFiles",
+          "name": "By File",
+          "when": "config.git.enabled && gitOpenRepositoryCount != 0"
+        },
+        {
+          "id": "dailyGitTime",
+          "name": "By Time",
+          "when": "config.git.enabled && gitOpenRepositoryCount != 0"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "dailyGitProgress.changeDate",
+        "title": "Change Date...",
+        "icon": "$(calendar)",
+        "category": "Daily Git Progress"
+      },
+      {
+        "command": "dailyGitProgress.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)",
+        "category": "Daily Git Progress"
+      },
+      {
+        "command": "dailyGitProgress.openDiff",
+        "title": "Open Diff",
+        "category": "Daily Git Progress"
+      },
+      {
+        "command": "dailyGitProgress.openFile",
+        "title": "Open File",
+        "category": "Daily Git Progress"
+      },
+      {
+        "command": "dailyGitProgress.viewAsList",
+        "title": "View as List",
+        "icon": "$(list-flat)",
+        "category": "Daily Git Progress"
+      },
+      {
+        "command": "dailyGitProgress.viewAsTree",
+        "title": "View as Tree",
+        "icon": "$(list-tree)",
+        "category": "Daily Git Progress"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "dailyGitProgress.changeDate",
+          "when": "view == dailyGitCommits || view == dailyGitFiles || view == dailyGitTime",
+          "group": "navigation@1"
+        },
+        {
+          "command": "dailyGitProgress.refresh",
+          "when": "view == dailyGitCommits || view == dailyGitFiles || view == dailyGitTime",
+          "group": "navigation@2"
+        },
+        {
+          "command": "dailyGitProgress.viewAsList",
+          "when": "(view == dailyGitCommits || view == dailyGitFiles) && dailyGitProgress.viewAsTree",
+          "group": "navigation@3"
+        },
+        {
+          "command": "dailyGitProgress.viewAsTree",
+          "when": "(view == dailyGitCommits || view == dailyGitFiles) && !dailyGitProgress.viewAsTree",
+          "group": "navigation@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "dailyGitProgress.openDiff",
+          "when": "(view == dailyGitCommits || view == dailyGitFiles) && viewItem == file"
+        },
+        {
+          "command": "dailyGitProgress.openFile",
+          "when": "(view == dailyGitCommits || view == dailyGitFiles) && viewItem == file"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "compile": "webpack --mode none",
+    "watch": "webpack --mode none --watch",
+    "test-compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.81.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.0.0",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1"
+  }
+}
